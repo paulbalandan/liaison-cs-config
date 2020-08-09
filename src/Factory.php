@@ -39,7 +39,7 @@ final class Factory
     {
         if (PHP_VERSION_ID < $ruleset->getRequiredPHPVersion()) {
             throw new RuntimeException(sprintf(
-                'Ruleset "%s" requires a minimum PHP version ID "%d" but current PHP version ID is "%d".',
+                'Ruleset "%s" requires a minimum PHP version ID of "%d" but current PHP version ID is "%d".',
                 $ruleset->getName(),
                 $ruleset->getRequiredPHPVersion(),
                 PHP_VERSION_ID
@@ -49,7 +49,7 @@ final class Factory
         // Resolve Config options
         $cacheFile      = $options['cacheFile']      ?? '.php_cs.cache';
         $customFixers   = $options['customFixers']   ?? [];
-        $finder         = $options['finder']         ?? new Finder();
+        $finder         = $options['finder']         ?? (new Finder())->in(__DIR__ . '/..');
         $format         = $options['format']         ?? 'txt';
         $hideProgress   = $options['hideProgress']   ?? false;
         $indent         = $options['indent']         ?? '    ';

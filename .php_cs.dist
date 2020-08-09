@@ -2,7 +2,6 @@
 
 use Liaison\CS\Config\Factory;
 use Liaison\CS\Config\Ruleset\Liaison;
-use PhpCsFixer\Finder;
 
 $header = <<<EOD
 This file is part of Liaison CS Config Factory.
@@ -14,9 +13,4 @@ file that was distributed with this source code.
 
 EOD;
 
-$finder = Finder::create()
-    ->in(__DIR__)
-    ->name('.php_cs.dist')
-;
-
-return Factory::create(new Liaison($header), [], ['finder' => $finder]);
+return Factory::create(new Liaison($header));
