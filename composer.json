@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Liaison\\PhpCsFixer\\ConfigFactory\\": "src/"
+            "Liaison\\CS\\Config\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Liaison\\PhpCsFixer\\ConfigFactory\\Tests\\": "tests/"
+            "Liaison\\CS\\Config\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable",
