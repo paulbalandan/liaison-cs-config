@@ -1,0 +1,22 @@
+<?php
+
+use Liaison\CS\Config\Factory;
+use Liaison\CS\Config\Ruleset\Liaison;
+use PhpCsFixer\Finder;
+
+$header = <<<EOD
+This file is part of Liaison CS Config Factory.
+
+(c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+EOD;
+
+$finder = Finder::create()
+    ->in(__DIR__)
+    ->name('.php_cs.dist')
+;
+
+return Factory::create(new Liaison($header), [], ['finder' => $finder]);
