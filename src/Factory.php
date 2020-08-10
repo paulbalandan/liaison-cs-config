@@ -18,11 +18,6 @@ use RuntimeException;
 
 final class Factory
 {
-    private function __construct()
-    {
-        // Nothing to instantiate.
-    }
-
     /**
      * Creates a new `PhpCsFixer\Config` instance with the
      * passed custom ruleset.
@@ -37,12 +32,12 @@ final class Factory
      */
     public static function create(RulesetInterface $ruleset, array $overrides = [], array $options = []): Config
     {
-        if (PHP_VERSION_ID < $ruleset->getRequiredPHPVersion()) {
+        if (\PHP_VERSION_ID < $ruleset->getRequiredPHPVersion()) {
             throw new RuntimeException(sprintf(
                 'Ruleset "%s" requires a minimum PHP version ID of "%d" but current PHP version ID is "%d".',
                 $ruleset->getName(),
                 $ruleset->getRequiredPHPVersion(),
-                PHP_VERSION_ID
+                \PHP_VERSION_ID
             ));
         }
 

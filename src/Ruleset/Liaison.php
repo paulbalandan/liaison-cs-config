@@ -129,7 +129,15 @@ class Liaison extends BaseRuleset
         'multiline_whitespace_before_semicolons' => [
             'strategy' => 'new_line_for_chained_calls',
         ],
-        'native_constant_invocation' => false, // risky
+        'native_constant_invocation' => [ // risky
+            'fix_built_in' => false,
+            'include'      => [
+                'DIRECTORY_SEPARATOR',
+                'PHP_SAPI',
+                'PHP_VERSION_ID',
+            ],
+            'scope' => 'namespaced',
+        ],
         'native_function_casing'     => true,
         'native_function_invocation' => [ // risky
             'include' => [
