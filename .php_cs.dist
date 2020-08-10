@@ -3,7 +3,7 @@
 use Liaison\CS\Config\Factory;
 use Liaison\CS\Config\Ruleset\Liaison;
 
-$header = <<<EOD
+$header = <<<'EOD'
 This file is part of Liaison CS Config Factory.
 
 (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
