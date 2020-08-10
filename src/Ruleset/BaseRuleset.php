@@ -59,7 +59,7 @@ abstract class BaseRuleset implements RulesetInterface
     /**
      * {@inheritdoc}
      */
-    final public function getName(): string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -67,7 +67,7 @@ abstract class BaseRuleset implements RulesetInterface
     /**
      * {@inheritdoc}
      */
-    final public function getRules(): array
+    public function getRules(): array
     {
         return $this->rules;
     }
@@ -75,7 +75,7 @@ abstract class BaseRuleset implements RulesetInterface
     /**
      * {@inheritdoc}
      */
-    final public function getRequiredPHPVersion(): int
+    public function getRequiredPHPVersion(): int
     {
         return $this->requiredPHPVersion;
     }
@@ -83,7 +83,7 @@ abstract class BaseRuleset implements RulesetInterface
     /**
      * {@inheritdoc}
      */
-    final public function isRiskyRuleset(): bool
+    public function isRiskyRuleset(): bool
     {
         return $this->isRisky;
     }

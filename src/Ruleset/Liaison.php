@@ -14,7 +14,7 @@ namespace Liaison\CS\Config\Ruleset;
 /**
  * Rules for the `Liaison` namespace.
  */
-final class Liaison extends BaseRuleset
+class Liaison extends BaseRuleset
 {
     protected $name = 'Liaison (PHP 7.3)';
 
@@ -73,7 +73,7 @@ final class Liaison extends BaseRuleset
         'explicit_string_variable'               => true,
         'final_class'                            => false, // risky
         'final_internal_class'                   => true, // risky
-        'final_public_method_for_abstract_class' => true, // risky
+        'final_public_method_for_abstract_class' => false, // risky
         'final_static_access'                    => true,
         'fopen_flag_order'                       => true, // risky
         'fopen_flags'                            => [
