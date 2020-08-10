@@ -1,5 +1,6 @@
 # Liaison CS Config Factory
 
+![build](https://github.com/paulbalandan/liaison-cs-config/workflows/build/badge.svg?branch=develop)
 [![license MIT](https://img.shields.io/github/license/paulbalandan/cs-config)](LICENSE)
 
 This library provides a configuration factory for custom rule sets
