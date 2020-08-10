@@ -32,7 +32,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Liaison\\CS\\Config\\Tests\\": "tests/"
+            "Liaison\\CS\\Config\\Tests\\": "tests/src/"
         }
     },
     "minimum-stability": "stable",
