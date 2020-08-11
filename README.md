@@ -56,11 +56,10 @@ use Liaison\CS\Config\Ruleset\Liaison;
 + $header = <<<EOD
 + This file is part of Liaison CS Config Factory.
 +
-+ (c) John Paul E. Balandan, CPA + <paulbalandan@gmail.com>
++ (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
 +
-+ For the full copyright and license information, + please view the LICENSE
++ For the full copyright and license information, please view the LICENSE
 + file that was distributed with this source code.
-+
 + EOD;
 
 - return Factory::create(new Liaison());
