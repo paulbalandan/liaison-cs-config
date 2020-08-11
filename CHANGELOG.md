@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.1](https://github.com/paulbalandan/liaison-cs-config/compare/v1.0.0...v1.0.1) - 2020-08-11
+
+### Commits
+
+- Fix wrong Finder's default file location [`e25915c`](https://github.com/paulbalandan/liaison-cs-config/commit/e25915c8fc1d038b512b64f348abf2ee6f0bbe07)
+- Add CHANGELOG [`c995b6b`](https://github.com/paulbalandan/liaison-cs-config/commit/c995b6bbbb1b445ba1d6c7de33241d021f540cfe)
+
 ## v1.0.0 - 2020-08-11
 
 ### Commits
