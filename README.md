@@ -2,6 +2,9 @@
 
 ![build](https://github.com/paulbalandan/liaison-cs-config/workflows/build/badge.svg?branch=develop)
 [![license MIT](https://img.shields.io/github/license/paulbalandan/cs-config)](LICENSE)
+[![Latest Stable Version](https://poser.pugx.org/liaison/cs-config/v)](https://packagist.org/packages/liaison/cs-config)
+[![Latest Unstable Version](https://poser.pugx.org/liaison/cs-config/v/unstable)](https://packagist.org/packages/liaison/cs-config)
+[![Total Downloads](https://poser.pugx.org/liaison/cs-config/downloads)](https://packagist.org/packages/liaison/cs-config)
 
 This library provides a configuration factory for custom rule sets
 for [`friendsofphp/php-cs-fixer`](http://github.com/FriendsOfPHP/PHP-CS-Fixer).
