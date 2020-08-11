@@ -44,7 +44,7 @@ final class Factory
         // Resolve Config options
         $cacheFile      = $options['cacheFile']      ?? '.php_cs.cache';
         $customFixers   = $options['customFixers']   ?? [];
-        $finder         = $options['finder']         ?? (new Finder())->in(__DIR__ . '/..');
+        $finder         = $options['finder']         ?? (new Finder())->in(__DIR__ . '/../../../..');
         $format         = $options['format']         ?? 'txt';
         $hideProgress   = $options['hideProgress']   ?? false;
         $indent         = $options['indent']         ?? '    ';
