@@ -46,5 +46,5 @@ interface RulesetInterface
      *
      * @return bool
      */
-    public function isRiskyRuleset(): bool;
+    public function willAutoActivateIsRiskyAllowed(): bool;
 }

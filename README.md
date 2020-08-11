@@ -2,6 +2,9 @@
 
 ![build](https://github.com/paulbalandan/liaison-cs-config/workflows/build/badge.svg?branch=develop)
 [![license MIT](https://img.shields.io/github/license/paulbalandan/cs-config)](LICENSE)
+[![Latest Stable Version](https://poser.pugx.org/liaison/cs-config/v)](https://packagist.org/packages/liaison/cs-config)
+[![Latest Unstable Version](https://poser.pugx.org/liaison/cs-config/v/unstable)](https://packagist.org/packages/liaison/cs-config)
+[![Total Downloads](https://poser.pugx.org/liaison/cs-config/downloads)](https://packagist.org/packages/liaison/cs-config)
 
 This library provides a configuration factory for custom rule sets
 for [`friendsofphp/php-cs-fixer`](http://github.com/FriendsOfPHP/PHP-CS-Fixer).
@@ -39,9 +42,9 @@ default, the cache file will be saved in the project root.
 ```diff
 vendor/
 
-+ # php-cs-fixer
-+ .php_cs
-+ .php_cs.cache
++# php-cs-fixer
++.php_cs
++.php_cs.cache
 ```
 
 ### Advanced Configuration
@@ -53,18 +56,17 @@ vendor/
 use Liaison\CS\Config\Factory;
 use Liaison\CS\Config\Ruleset\Liaison;
 
-+ $header = <<<EOD
-+ This file is part of Liaison CS Config Factory.
++$header = <<<EOD
++This file is part of Liaison CS Config Factory.
 +
-+ (c) John Paul E. Balandan, CPA + <paulbalandan@gmail.com>
++(c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
 +
-+ For the full copyright and license information, + please view the LICENSE
-+ file that was distributed with this source code.
-+
-+ EOD;
++For the full copyright and license information, please view the LICENSE
++file that was distributed with this source code.
++EOD;
 
-- return Factory::create(new Liaison());
-+ return Factory::create(new Liaison($header));
+-return Factory::create(new Liaison());
++return Factory::create(new Liaison($header));
 
 ```
 
@@ -95,10 +97,10 @@ If you feel that a specific rule in the ruleset is not appropriate for you, you 
 use Liaison\CS\Config\Factory;
 use Liaison\CS\Config\Ruleset\Liaison;
 
-- return Factory::create(new Liaison());
-+ return Factory::create(new Liaison(), [
-+     'binary_operator_spaces' => false,
-+ ]);
+-return Factory::create(new Liaison());
++return Factory::create(new Liaison(), [
++    'binary_operator_spaces' => false,
++]);
 
 ```
 
@@ -129,11 +131,11 @@ containing your desired options.
 use Liaison\CS\Config\Factory;
 use Liaison\CS\Config\Ruleset\Liaison;
 
-- return Factory::create(new Liaison());
-+ return Factory::create(new Liaison(), [], [
-+     'usingCache'  => false,
-+     'hideProgress => true,
-+ ]);
+-return Factory::create(new Liaison());
++return Factory::create(new Liaison(), [], [
++    'usingCache'  => false,
++    'hideProgress => true,
++]);
 ```
 
 ## Custom Rulesets
@@ -180,16 +182,17 @@ class MyCompany extends BaseRuleset
   protected $requiredPHPVersion = 70400;
 
   /**
-   * Does this ruleset have risky rules? If yes and
-   * PhpCsFixer\Config has the `$isRiskyAllowed` set to
-   * `false`, those risky rules won't be run.
+   * Does this ruleset have risky rules?
+   *
+   * If yes and `PhpCsFixer\Config` has the `$isRiskyAllowed`
+   * flag set to `false`, those risky rules won't be run.
    *
    * Set this flag to `true` to automatically setup
    * the `$isRiskyAllowed` flag.
    *
    * @var bool
    */
-  protected $isRisky = false;
+  protected $autoActivateIsRiskyAllowed = false;
 }
 
 ```

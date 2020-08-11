@@ -35,11 +35,11 @@ abstract class BaseRuleset implements RulesetInterface
     protected $requiredPHPVersion = 0;
 
     /**
-     * Is this ruleset risky?
+     * Have this ruleset turn on `$isRiskyAllowed` flag?
      *
      * @var bool
      */
-    protected $isRisky = false;
+    protected $autoActivateIsRiskyAllowed = false;
 
     /**
      * Constructor.
@@ -83,8 +83,8 @@ abstract class BaseRuleset implements RulesetInterface
     /**
      * {@inheritdoc}
      */
-    public function isRiskyRuleset(): bool
+    public function willAutoActivateIsRiskyAllowed(): bool
     {
-        return $this->isRisky;
+        return $this->autoActivateIsRiskyAllowed;
     }
 }
