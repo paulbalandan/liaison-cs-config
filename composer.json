@@ -37,6 +37,14 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "scripts": {
+        "changelog-update": "auto-changelog --hide-credit --template keepachangelog --commit-limit false --sort-commits date-desc",
+        "changelog-update-unreleased": "@changelog-update --unreleased"
+    },
+    "scripts-descriptions": {
+        "changelog-update": "Updates CHANGELOG.md without unreleased section.",
+        "changelog-update-unreleased": "Updates CHANGELOG.md with unreleased section."
+    },
     "support": {
         "issues": "https://github.com/paulbalandan/liaison-cs-config/issues",
         "source": "https://github.com/paulbalandan/liaison-cs-config"

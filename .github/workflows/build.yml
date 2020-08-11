@@ -55,7 +55,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --ansi --no-progress --no-suggest --no-interaction --prefer-dist --optimize-autoloader
+        run: composer install --ansi --no-scripts --no-progress --no-suggest --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Run PHP-CS-Fixer
         run: vendor/bin/php-cs-fixer fix --config=.php_cs.dist --verbose --dry-run --stop-on-violation --using-cache=no
