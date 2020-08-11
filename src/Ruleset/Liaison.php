@@ -30,6 +30,7 @@ class Liaison extends BaseRuleset
             'default' => 'align_single_space',
         ],
         'blank_line_after_opening_tag' => true,
+        'blank_line_before_return'     => false, // deprecated
         'blank_line_before_statement'  => [
             'statements' => [
                 'return',
@@ -99,6 +100,8 @@ class Liaison extends BaseRuleset
             ],
         ],
         'global_namespace_import' => true,
+        'hash_to_slash_comment'   => false, // deprecated
+        'header_comment'          => false,
         'heredoc_indentation'     => true,
         'heredoc_to_nowdoc'       => true,
         'implode_call'            => true, // risky
@@ -113,6 +116,7 @@ class Liaison extends BaseRuleset
         ],
         'logical_operators'          => true, // risky
         'lowercase_cast'             => true,
+        'lowercase_constants'        => false, // deprecated
         'lowercase_static_reference' => true,
         'magic_constant_casing'      => true,
         'magic_method_casing'        => true,
@@ -124,6 +128,7 @@ class Liaison extends BaseRuleset
             'on_multiline'                     => 'ensure_fully_multiline',
         ],
         'method_chaining_indentation'            => true,
+        'method_separation'                      => false, // deprecated
         'modernize_types_casting'                => true, // risky
         'multiline_comment_opening_closing'      => true,
         'multiline_whitespace_before_semicolons' => [
@@ -174,13 +179,15 @@ class Liaison extends BaseRuleset
                 'default',
             ],
         ],
-        'no_homoglyph_names'              => true, // risky
-        'no_leading_import_slash'         => true,
-        'no_leading_namespace_whitespace' => true,
-        'no_mixed_echo_print'             => [
+        'no_extra_consecutive_blank_lines' => false, // deprecated
+        'no_homoglyph_names'               => true, // risky
+        'no_leading_import_slash'          => true,
+        'no_leading_namespace_whitespace'  => true,
+        'no_mixed_echo_print'              => [
             'use' => 'echo',
         ],
         'no_multiline_whitespace_around_double_arrow' => true,
+        'no_multiline_whitespace_before_semicolons'   => false, // deprecated
         'no_null_property_initialization'             => true,
         'no_php4_constructor'                         => true, // risky
         'no_short_bool_cast'                          => true,
@@ -265,6 +272,7 @@ class Liaison extends BaseRuleset
         'phpdoc_var_annotation_correct_order'           => true,
         'phpdoc_var_without_name'                       => true,
         'pow_to_exponentiation'                         => true,
+        'pre_increment'                                 => false, // deprecated
         'protected_to_private'                          => false,
         'psr0'                                          => false,
         'psr4'                                          => true,
@@ -276,6 +284,7 @@ class Liaison extends BaseRuleset
         'semicolon_after_instruction'                   => true,
         'set_type_to_cast'                              => true, // risky
         'short_scalar_cast'                             => true,
+        'silenced_deprecation_error'                    => false, // deprecated
         'simple_to_complex_string_variable'             => true,
         'simplified_null_return'                        => true,
         'single_blank_line_before_namespace'            => true,
@@ -314,5 +323,5 @@ class Liaison extends BaseRuleset
 
     protected $requiredPHPVersion = 70300;
 
-    protected $isRisky = true;
+    protected $autoActivateIsRiskyAllowed = true;
 }
