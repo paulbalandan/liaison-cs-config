@@ -1,0 +1,44 @@
+{
+    "name": "liaison/cs-config",
+    "type": "library",
+    "description": "A configuration factory for custom rule sets for friendsofphp/php-cs-fixer.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "John Paul E. Balandan, CPA",
+            "email": "paulbalandan@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Liaison\\CS\\Config\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Liaison\\CS\\Config\\Tests\\": "tests/src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/paulbalandan/liaison-cs-config/issues",
+        "source": "https://github.com/paulbalandan/liaison-cs-config"
+    }
+}
