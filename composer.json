@@ -10,11 +10,11 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.2",
         "friendsofphp/php-cs-fixer": "^2.16"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^8.5"
     },
     "config": {
         "optimize-autoloader": true,
@@ -37,14 +37,6 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "scripts": {
-        "changelog-update": "auto-changelog --hide-credit --template keepachangelog --commit-limit false --sort-commits date-desc",
-        "changelog-update-unreleased": "@changelog-update --unreleased"
-    },
-    "scripts-descriptions": {
-        "changelog-update": "Updates CHANGELOG.md without unreleased section.",
-        "changelog-update-unreleased": "Updates CHANGELOG.md with unreleased section."
-    },
     "support": {
         "issues": "https://github.com/paulbalandan/liaison-cs-config/issues",
         "source": "https://github.com/paulbalandan/liaison-cs-config"
