@@ -88,21 +88,14 @@ abstract class BaseRulesetTestCase extends TestCase
         $this->assertSame($expected, $rules['header_comment']);
     }
 
-    final public function headerCommentsProvider(): iterable
+    final public function headerCommentsProvider()
     {
-        $bar     = 'baz';
         $headers = [
             'empty'          => '',
             'not-empty'      => 'foo',
             'with-line-feed' => "\n",
             'with-spaces'    => '  ',
             'with-tab'       => "\t",
-            'with-heredoc'   => <<<EOD
-                    A foo with {$bar}
-                EOD,
-            'with-nowdoc'    => <<<'EOF'
-                    A foo bar
-                EOF
         ];
 
         foreach ($headers as $header) {
@@ -127,7 +120,7 @@ abstract class BaseRulesetTestCase extends TestCase
         ));
     }
 
-    final public function ruleNamesProvider(): iterable
+    final public function ruleNamesProvider()
     {
         $ruleset = self::createRuleset();
 
