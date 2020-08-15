@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/paulbalandan/liaison-cs-config/compare/v1.0.2...HEAD)
+## [v1.0.3](https://github.com/paulbalandan/liaison-cs-config/compare/v1.0.2...v1.0.3) - 2020-08-15
 
 ### Added
 
 - Add missing rules on `Liaison` ruleset hidden by `@PSR2` ruleset
+
+### Changed
+
+- Updated composer dependencies
+
+### Fixed
+
+- Heredoc rules conflicting with PHP 7.2
 
 ## [v1.0.2](https://github.com/paulbalandan/liaison-cs-config/compare/v1.0.1...v1.0.2) - 2020-08-13
 
