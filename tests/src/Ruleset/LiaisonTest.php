@@ -16,7 +16,6 @@ namespace Liaison\CS\Config\Tests\Ruleset;
  *
  * @covers \Liaison\CS\Config\Ruleset\BaseRuleset
  * @covers \Liaison\CS\Config\Ruleset\Liaison
- * @small
  */
 final class LiaisonTest extends BaseRulesetTestCase
 {
