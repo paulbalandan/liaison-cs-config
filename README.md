@@ -21,8 +21,7 @@ composer require --dev liaison/cs-config
 
 * Choose one of the configured rulesets:
   - [`Liaison\CS\Config\Ruleset\Liaison`](src/Ruleset/Liaison.php)
-  - `Liaison\CS\Config\Ruleset\CodeIgniter4` **(INCOMING)**
-  - `Liaison\CS\Config\Ruleset\Laravel7` **(INCOMING)**
+  - [`Liaison\CS\Config\Ruleset\CodeIgniter4`](src/Ruleset/CodeIgniter4.php)
 
 * Create a `.php_cs.dist` at the root of your project:
 
