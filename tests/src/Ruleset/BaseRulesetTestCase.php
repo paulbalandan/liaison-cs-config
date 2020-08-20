@@ -130,50 +130,6 @@ abstract class BaseRulesetTestCase extends TestCase
     }
 
     /**
-     * Creates an instance of the current ruleset.
-     *
-     * @param null|string $header
-     *
-     * @return \Liaison\CS\Config\Ruleset\RulesetInterface
-     */
-    final protected static function createRuleset(?string $header = null): RulesetInterface
-    {
-        $className  = self::getClassName();
-        $reflection = new ReflectionClass($className);
-        $ruleset    = $reflection->newInstance($header);
-
-        if (!$ruleset instanceof RulesetInterface || !$ruleset instanceof BaseRuleset) {
-            throw new RuntimeException(sprintf(
-                'Ruleset "%s" does not implement interface "%s" or does not extend "%s".',
-                $className,
-                'Liaison\CS\Config\Ruleset\RulesetInterface',
-                'Liaison\CS\Config\Ruleset\BaseRuleset'
-            ));
-        }
-
-        return $ruleset;
-    }
-
-    /**
-     * Extract the ruleset's class name.
-     *
-     * @return string
-     */
-    final protected static function getClassName(): string
-    {
-        $className = preg_replace('/Test$/', '', str_replace('\\Tests', '', static::class));
-
-        if (!\is_string($className) || '' === trim($className)) {
-            throw new RuntimeException(sprintf(
-                'Failed resolving class name from test class name "%s".',
-                static::class
-            ));
-        }
-
-        return $className;
-    }
-
-    /**
      * Rules defined by PhpCsFixer.
      *
      * @return string[]
@@ -206,5 +162,49 @@ abstract class BaseRulesetTestCase extends TestCase
         }, self::createRuleset()->getRules());
 
         return array_keys(RuleSet::create($rules)->getRules());
+    }
+
+    /**
+     * Creates an instance of the current ruleset.
+     *
+     * @param null|string $header
+     *
+     * @return \Liaison\CS\Config\Ruleset\RulesetInterface
+     */
+    final protected static function createRuleset(?string $header = null): RulesetInterface
+    {
+        $className  = self::getClassName();
+        $reflection = new ReflectionClass($className);
+        $ruleset    = $reflection->newInstance($header);
+
+        if (!$ruleset instanceof RulesetInterface || !$ruleset instanceof BaseRuleset) {
+            throw new RuntimeException(sprintf(
+                'Ruleset "%s" does not implement interface "%s" or does not extend "%s".',
+                $className,
+                'Liaison\\CS\\Config\\Ruleset\\RulesetInterface',
+                'Liaison\\CS\\Config\\Ruleset\\BaseRuleset'
+            ));
+        }
+
+        return $ruleset;
+    }
+
+    /**
+     * Extract the ruleset's class name.
+     *
+     * @return string
+     */
+    final protected static function getClassName(): string
+    {
+        $className = preg_replace('/Test$/', '', str_replace('\\Tests', '', static::class));
+
+        if (!\is_string($className) || '' === trim($className)) {
+            throw new RuntimeException(sprintf(
+                'Failed resolving class name from test class name "%s".',
+                static::class
+            ));
+        }
+
+        return $className;
     }
 }

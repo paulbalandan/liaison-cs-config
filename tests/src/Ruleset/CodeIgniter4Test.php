@@ -15,9 +15,8 @@ namespace Liaison\CS\Config\Tests\Ruleset;
  * @internal
  *
  * @covers \Liaison\CS\Config\Ruleset\BaseRuleset
- * @covers \Liaison\CS\Config\Ruleset\Liaison
+ * @covers \Liaison\CS\Config\Ruleset\CodeIgniter4
  */
-final class LiaisonTest extends BaseRulesetTestCase
+final class CodeIgniter4Test extends BaseRulesetTestCase
 {
-    // Test the actual ruleset's properties
 }
