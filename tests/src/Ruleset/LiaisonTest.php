@@ -19,5 +19,4 @@ namespace Liaison\CS\Config\Tests\Ruleset;
  */
 final class LiaisonTest extends BaseRulesetTestCase
 {
-    // Test the actual ruleset's properties
 }

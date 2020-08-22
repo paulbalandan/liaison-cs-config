@@ -181,8 +181,8 @@ abstract class BaseRulesetTestCase extends TestCase
             throw new RuntimeException(sprintf(
                 'Ruleset "%s" does not implement interface "%s" or does not extend "%s".',
                 $className,
-                'Liaison\\CS\\Config\\Ruleset\\RulesetInterface',
-                'Liaison\\CS\\Config\\Ruleset\\BaseRuleset'
+                'Liaison\CS\Config\Ruleset\RulesetInterface',
+                'Liaison\CS\Config\Ruleset\BaseRuleset'
             ));
         }
 
