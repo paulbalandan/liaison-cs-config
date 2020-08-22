@@ -89,7 +89,7 @@ class Liaison extends BaseRuleset
         'escape_implicit_backslashes' => [
             'double_quoted'  => true,
             'heredoc_syntax' => true,
-            'single_quoted'  => true,
+            'single_quoted'  => false,
         ],
         'explicit_indirect_variable'             => true,
         'explicit_string_variable'               => true,

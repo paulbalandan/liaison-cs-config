@@ -13,8 +13,6 @@ namespace Liaison\CS\Config\Tests;
 
 use Liaison\CS\Config\Factory;
 use Liaison\CS\Config\Ruleset\Liaison;
-use Liaison\CS\Config\Ruleset\RulesetInterface;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,8 +22,8 @@ final class FactoryTest extends TestCase
 {
     public function testFactoryThrowsExceptionOnIncompatibleVersionId()
     {
-        /** @var MockObject&RulesetInterface */
-        $ruleset = $this->createMock('Liaison\\CS\\Config\\Ruleset\\Liaison');
+        /** @var \PHPUnit\Framework\MockObject\MockObject&\Liaison\CS\Config\Ruleset\RulesetInterface */
+        $ruleset = $this->createMock('Liaison\CS\Config\Ruleset\Liaison');
         $ruleset
             ->method('getRequiredPHPVersion')
             ->willReturn(\PHP_VERSION_ID + 2)
@@ -44,7 +42,7 @@ final class FactoryTest extends TestCase
     public function testFactoryReturnsInstanceOfConfig()
     {
         $config = Factory::create(new Liaison());
-        $this->assertInstanceOf('PhpCsFixer\\Config', $config);
+        $this->assertInstanceOf('PhpCsFixer\Config', $config);
     }
 
     public function testFactoryPassesSameRulesFromRuleset()
@@ -72,7 +70,7 @@ final class FactoryTest extends TestCase
 
         $this->assertSame('.php_cs.cache', $config->getCacheFile());
         $this->assertSame([], $config->getCustomFixers());
-        $this->assertInstanceOf('PhpCsFixer\\Finder', $config->getFinder());
+        $this->assertInstanceOf('PhpCsFixer\Finder', $config->getFinder());
         $this->assertSame('txt', $config->getFormat());
         $this->assertFalse($config->getHideProgress());
         $this->assertSame('    ', $config->getIndent());
