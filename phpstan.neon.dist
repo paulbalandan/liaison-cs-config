@@ -1,0 +1,13 @@
+parameters:
+  tmpDir: build/phpstan
+  level: 6
+  paths:
+    - src
+    - tests
+  bootstrapFiles:
+    - vendor/autoload.php
+  parallel:
+    processTimeout: 300.0
+  checkMissingIterableValueType: false
+  ignoreErrors:
+    - '#Method Liaison\\CS\\Config\\Tests\\(.*) has no return typehint specified.#'
