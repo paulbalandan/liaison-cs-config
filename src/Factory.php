@@ -42,7 +42,7 @@ final class Factory
         }
 
         $defaultFinder = Finder::create()
-            ->in(__DIR__ . '/../../../..')
+            ->in(realpath(__DIR__ . '/../../../..'))
             ->exclude([
                 'build',
             ])
