@@ -41,10 +41,17 @@ final class Factory
             ));
         }
 
+        $defaultFinder = Finder::create()
+            ->in(__DIR__ . '/../../../..')
+            ->exclude([
+                'build',
+            ])
+        ;
+
         // Resolve Config options
         $cacheFile      = $options['cacheFile']      ?? '.php_cs.cache';
         $customFixers   = $options['customFixers']   ?? [];
-        $finder         = $options['finder']         ?? (new Finder())->in(realpath(__DIR__ . '/../../../..'));
+        $finder         = $options['finder']         ?? $defaultFinder;
         $format         = $options['format']         ?? 'txt';
         $hideProgress   = $options['hideProgress']   ?? false;
         $indent         = $options['indent']         ?? '    ';
