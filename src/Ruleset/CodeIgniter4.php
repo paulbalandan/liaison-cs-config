@@ -241,7 +241,7 @@ class CodeIgniter4 extends BaseRuleset
         'phpdoc_line_span'                                 => true,
         'phpdoc_no_access'                                 => true,
         'phpdoc_no_alias_tag'                              => true,
-        'phpdoc_no_empty_return'                           => true,
+        'phpdoc_no_empty_return'                           => false,
         'phpdoc_no_package'                                => false,
         'phpdoc_no_useless_inheritdoc'                     => true,
         'phpdoc_order'                                     => true,
@@ -270,7 +270,7 @@ class CodeIgniter4 extends BaseRuleset
         'random_api_migration'                => true,
         'return_assignment'                   => true,
         'return_type_declaration'             => true,
-        'self_accessor'                       => true, // risky
+        'self_accessor'                       => false, // risky
         'self_static_accessor'                => true,
         'semicolon_after_instruction'         => true,
         'set_type_to_cast'                    => true, // risky
