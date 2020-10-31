@@ -41,11 +41,13 @@ final class Factory
             ));
         }
 
+        // Meant to be used in vendor/ to get to the root directory
+        $dir = \dirname(__DIR__, 4);
+        $dir = realpath($dir) ?: $dir;
+
         $defaultFinder = Finder::create()
-            ->in(realpath(__DIR__ . '/../../../..'))
-            ->exclude([
-                'build',
-            ])
+            ->in([$dir])
+            ->exclude(['build'])
         ;
 
         // Resolve Config options
