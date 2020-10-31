@@ -12,9 +12,13 @@ for [`friendsofphp/php-cs-fixer`](http://github.com/FriendsOfPHP/PHP-CS-Fixer).
 
 ## Installation
 
-```bash
-composer require --dev liaison/cs-config
-```
+You can add this library as a local, per-project dependency to your project using [Composer](https://getcomposer.org/):
+
+    composer require liaison/cs-config
+
+If you only need this library during development, for instance to run your project's test suite, then you should add it as a development-time dependency:
+
+    composer require --dev liaison/cs-config
 
 ## Getting Started
 
