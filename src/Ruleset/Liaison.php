@@ -129,7 +129,7 @@ class Liaison extends BaseRuleset
         ],
         'hash_to_slash_comment'       => false, // deprecated
         'header_comment'              => false,
-        'heredoc_indentation'         => false, // change to true on PHP 7.3
+        'heredoc_indentation'         => true,
         'heredoc_to_nowdoc'           => true,
         'implode_call'                => true, // risky
         'include'                     => true,
@@ -148,7 +148,7 @@ class Liaison extends BaseRuleset
         'magic_method_casing'         => true,
         'mb_str_functions'            => true, // risky
         'method_argument_space'       => [
-            'after_heredoc'                    => false, // change to true on PHP 7.3
+            'after_heredoc'                    => true,
             'ensure_fully_multiline'           => true,
             'keep_multiple_spaces_after_comma' => false,
             'on_multiline'                     => 'ensure_fully_multiline',
@@ -371,7 +371,7 @@ class Liaison extends BaseRuleset
         ],
     ];
 
-    protected $requiredPHPVersion = 70200;
+    protected $requiredPHPVersion = 70300;
 
     protected $autoActivateIsRiskyAllowed = true;
 }
