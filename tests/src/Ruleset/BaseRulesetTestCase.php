@@ -25,7 +25,31 @@ use RuntimeException;
  */
 abstract class BaseRulesetTestCase extends TestCase
 {
-    final public function testAllConfiguredRulesAreBuiltIn()
+    final public static function headerCommentsProvider(): iterable
+    {
+        $headers = [
+            'empty'          => '',
+            'not-empty'      => 'foo',
+            'with-line-feed' => "\n",
+            'with-spaces'    => '  ',
+            'with-tab'       => "\t",
+        ];
+
+        foreach ($headers as $header) {
+            yield [$header];
+        }
+    }
+
+    final public static function ruleNamesProvider(): iterable
+    {
+        $ruleset = self::createRuleset();
+
+        return [
+            [$ruleset->getName(), array_keys($ruleset->getRules())],
+        ];
+    }
+
+    final public function testAllConfiguredRulesAreBuiltIn(): void
     {
         $fixersNotBuiltIn = array_diff(
             $this->configuredFixers(),
@@ -44,7 +68,7 @@ abstract class BaseRulesetTestCase extends TestCase
         ));
     }
 
-    final public function testAllBuiltInRulesAreConfigured()
+    final public function testAllBuiltInRulesAreConfigured(): void
     {
         $fixersWithoutConfiguration = array_diff(
             $this->builtInFixers(),
@@ -63,7 +87,7 @@ abstract class BaseRulesetTestCase extends TestCase
         ));
     }
 
-    final public function testHeaderCommentFixerIsDisabledByDefault()
+    final public function testHeaderCommentFixerIsDisabledByDefault(): void
     {
         $rules = self::createRuleset()->getRules();
 
@@ -75,8 +99,10 @@ abstract class BaseRulesetTestCase extends TestCase
      * @dataProvider headerCommentsProvider
      *
      * @param string $header
+     *
+     * @return void
      */
-    final public function testHeaderCommentFixerIsEnabledIfHeaderIsProvided(string $header)
+    final public function testHeaderCommentFixerIsEnabledIfHeaderIsProvided(string $header): void
     {
         $rules    = self::createRuleset($header)->getRules();
         $expected = [
@@ -88,28 +114,15 @@ abstract class BaseRulesetTestCase extends TestCase
         $this->assertSame($expected, $rules['header_comment']);
     }
 
-    final public function headerCommentsProvider()
-    {
-        $headers = [
-            'empty'          => '',
-            'not-empty'      => 'foo',
-            'with-line-feed' => "\n",
-            'with-spaces'    => '  ',
-            'with-tab'       => "\t",
-        ];
-
-        foreach ($headers as $header) {
-            yield [$header];
-        }
-    }
-
     /**
      * @dataProvider ruleNamesProvider
      *
      * @param string $source
      * @param array  $rules
+     *
+     * @return void
      */
-    final public function testRulesAreSortedByName(string $source, array $rules)
+    final public function testRulesAreSortedByName(string $source, array $rules): void
     {
         $sorted = $rules;
         sort($sorted);
@@ -118,15 +131,6 @@ abstract class BaseRulesetTestCase extends TestCase
             'Failed to assert that the rules in "%s" are sorted by name.',
             $source
         ));
-    }
-
-    final public function ruleNamesProvider()
-    {
-        $ruleset = self::createRuleset();
-
-        return [
-            [$ruleset->getName(), array_keys($ruleset->getRules())],
-        ];
     }
 
     /**

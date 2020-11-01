@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class FactoryTest extends TestCase
 {
-    public function testFactoryThrowsExceptionOnIncompatibleVersionId()
+    public function testFactoryThrowsExceptionOnIncompatibleVersionId(): void
     {
         /** @var \PHPUnit\Framework\MockObject\MockObject&\Liaison\CS\Config\Ruleset\RulesetInterface */
         $ruleset = $this->createMock('Liaison\CS\Config\Ruleset\Liaison');
@@ -39,13 +39,13 @@ final class FactoryTest extends TestCase
         Factory::create($ruleset);
     }
 
-    public function testFactoryReturnsInstanceOfConfig()
+    public function testFactoryReturnsInstanceOfConfig(): void
     {
         $config = Factory::create(new Liaison());
         $this->assertInstanceOf('PhpCsFixer\Config', $config);
     }
 
-    public function testFactoryPassesSameRulesFromRuleset()
+    public function testFactoryPassesSameRulesFromRuleset(): void
     {
         $ruleset = new Liaison();
         $config  = Factory::create($ruleset);
@@ -53,7 +53,7 @@ final class FactoryTest extends TestCase
         $this->assertSame($ruleset->getRules(), $config->getRules());
     }
 
-    public function testFactoryAllowsOverrideOfRules()
+    public function testFactoryAllowsOverrideOfRules(): void
     {
         $config = Factory::create(new Liaison());
         $this->assertSame(['default' => 'align_single_space_minimal'], $config->getRules()['binary_operator_spaces']);
@@ -64,7 +64,7 @@ final class FactoryTest extends TestCase
         $this->assertFalse($config->getRules()['binary_operator_spaces']);
     }
 
-    public function testFactoryReturnsDefaultOptionsWhenNoOptionsGiven()
+    public function testFactoryReturnsDefaultOptionsWhenNoOptionsGiven(): void
     {
         $config = Factory::create(new Liaison());
 
@@ -80,7 +80,7 @@ final class FactoryTest extends TestCase
         $this->assertTrue($config->getUsingCache());
     }
 
-    public function testFactoryConsumesPassedOptionsToIt()
+    public function testFactoryConsumesPassedOptionsToIt(): void
     {
         $options = [
             'cacheFile'     => __DIR__ . '/../../build/.php_cs.cache',
@@ -102,7 +102,7 @@ final class FactoryTest extends TestCase
         $this->assertFalse($config->getUsingCache());
     }
 
-    public function testCreateForLibraryCreatesPreformattedLicense()
+    public function testCreateForLibraryCreatesPreformattedLicense(): void
     {
         $config = Factory::createForLibrary('Library', 'Foo Bar', 2020, 'Liaison\CS\Config\Ruleset\Liaison');
         $header = $config->getRules()['header_comment']['header'];
@@ -111,7 +111,7 @@ final class FactoryTest extends TestCase
         $this->assertStringContainsString('(c) 2020 Foo Bar', $header);
     }
 
-    public function testCreateForLibraryThrowsRuntimeExceptionForWrongRuleset()
+    public function testCreateForLibraryThrowsRuntimeExceptionForWrongRuleset(): void
     {
         $this->expectException('RuntimeException');
         Factory::createForLibrary('Library', 'Foo', 2020, 'Liaison\CS\Config\Factory');

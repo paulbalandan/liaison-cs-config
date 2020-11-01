@@ -9,5 +9,3 @@ parameters:
   parallel:
     processTimeout: 300.0
   checkMissingIterableValueType: false
-  ignoreErrors:
-    - '#^Method Liaison\\CS\\Config\\Tests\\(.*) has no return typehint specified\.$#'
