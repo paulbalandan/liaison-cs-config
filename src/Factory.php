@@ -90,6 +90,7 @@ final class Factory
         $dir = realpath($dir) ?: $dir;
 
         $defaultFinder = Finder::create()
+            ->files()
             ->in([$dir])
             ->exclude(['build'])
         ;

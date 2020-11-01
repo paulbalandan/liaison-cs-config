@@ -5,6 +5,7 @@ use Liaison\CS\Config\Ruleset\Liaison;
 use PhpCsFixer\Finder;
 
 $finder = Finder::create()
+    ->files()
     ->in(__DIR__)
     ->exclude('build')
 ;
