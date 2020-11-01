@@ -63,7 +63,7 @@ use Liaison\CS\Config\Ruleset\Liaison;
 +$header = <<<EOD
 +This file is part of Liaison CS Config Factory.
 +
-+(c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
++(c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
 +
 +For the full copyright and license information, please view the LICENSE
 +file that was distributed with this source code.
@@ -82,7 +82,7 @@ This will enable and configure the `HeaderCommentFixer` so that file headers wil
 /**
  * This file is part of Liaison CS Config Factory.
  *
- * (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
+ * (c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -90,6 +90,31 @@ This will enable and configure the `HeaderCommentFixer` so that file headers wil
 
 namespace Liaison\CS\Config;
 ```
+
+Alternatively, as of v1.2.0, you can use the `Factory::createForLibrary()` method to add a pre-formatted
+license header comment like in above. This static method accepts four required arguments and two optional
+arguments in the following order:
+
+- string `$library`
+- string `$author`
+- int `$initialLicenseYear`
+- string `$rulesetName`
+- array `$overrides` (default: `[]`)
+- array `$options` (default: `[]`)
+
+```diff
+<?php
+
+use Liaison\CS\Config\Factory;
+use Liaison\CS\Config\Ruleset\Liaison;
+
+-return Factory::create(new Liaison());
++return Factory::createForLibrary('My Library', 'John Doe', 2020, Liaison::class);
+
+```
+
+This will create the same file headers as above. To configure a different format for the file header,
+you should the first method using `Factory::create()`.
 
 * Overriding rules in the ruleset
 

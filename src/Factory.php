@@ -3,7 +3,7 @@
 /**
  * This file is part of Liaison CS Config Factory.
  *
- * (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
+ * (c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,6 +18,50 @@ use RuntimeException;
 
 final class Factory
 {
+    /**
+     * An enhancement to self::create() that creates a pre-formatted license header.
+     *
+     * @param string $library
+     * @param string $author
+     * @param int    $initialLicenseYear
+     * @param string $rulesetName
+     * @param array  $overrides
+     * @param array  $options
+     *
+     * @throws RuntimeException
+     *
+     * @return \PhpCsFixer\Config
+     */
+    public static function createForLibrary(
+        string $library,
+        string $author,
+        int $initialLicenseYear,
+        string $rulesetName,
+        array $overrides = [],
+        array $options = []
+    ) {
+        $header = <<<HEADER
+            This file is part of {$library}.
+
+            (c) {$initialLicenseYear} {$author}
+
+            For the full copyright and license information, please view the LICENSE
+            file that was distributed with this source code.
+            HEADER;
+
+        $ruleset = new $rulesetName($header);
+
+        if (!$ruleset instanceof RulesetInterface) {
+            throw new RuntimeException(sprintf(
+                'Ruleset "%s" does not implement interface "%s".',
+                $rulesetName,
+                'Liaison\CS\Config\Ruleset\RulesetInterface'
+            ));
+        }
+
+        return self::create($ruleset, $overrides, $options);
+    }
+
     /**
      * Creates a new `PhpCsFixer\Config` instance with the
      * passed custom ruleset.

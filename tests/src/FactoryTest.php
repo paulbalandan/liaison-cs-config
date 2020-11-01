@@ -3,7 +3,7 @@
 /**
  * This file is part of Liaison CS Config Factory.
  *
- * (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
+ * (c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -100,5 +100,20 @@ final class FactoryTest extends TestCase
         $this->assertSame($options['lineEnding'], $config->getLineEnding());
         $this->assertSame($options['phpExecutable'], $config->getPhpExecutable());
         $this->assertFalse($config->getUsingCache());
+    }
+
+    public function testCreateForLibraryCreatesPreformattedLicense()
+    {
+        $config = Factory::createForLibrary('Library', 'Foo Bar', 2020, 'Liaison\CS\Config\Ruleset\Liaison');
+        $header = $config->getRules()['header_comment']['header'];
+
+        $this->assertStringContainsString('This file is part of Library.', $header);
+        $this->assertStringContainsString('(c) 2020 Foo Bar', $header);
+    }
+
+    public function testCreateForLibraryThrowsRuntimeExceptionForWrongRuleset()
+    {
+        $this->expectException('RuntimeException');
+        Factory::createForLibrary('Library', 'Foo', 2020, 'Liaison\CS\Config\Factory');
     }
 }
