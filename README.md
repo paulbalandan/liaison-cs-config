@@ -141,7 +141,7 @@ containing your desired options.
 
 **Options**
 
-| Key            | Allowed Types (from `ConfigInterface`)   | Default                              |
+| Key            | Allowed Types                            | Default                              |
 | -------------- | :--------------------------------------: | :----------------------------------: |
 | cacheFile      | `string`                                 | `.php_cs.cache`                      |
 | customFixers   | `FixerInterface[], iterable, \Traversable` | `[]`                                 |
@@ -153,6 +153,7 @@ containing your desired options.
 | phpExecutable  | `null, string`                           | `null`                               |
 | isRiskyAllowed | `bool`                                   | `false`                              |
 | usingCache     | `bool`                                   | `true`                               |
+| customRules    | `array`                                  | `[]`                                 |
 
 ```diff
 <?php

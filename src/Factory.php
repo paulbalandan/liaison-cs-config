@@ -106,7 +106,9 @@ final class Factory
         $phpExecutable  = $options['phpExecutable']  ?? null;
         $isRiskyAllowed = $options['isRiskyAllowed'] ?? ($ruleset->willAutoActivateIsRiskyAllowed() ?: false);
         $usingCache     = $options['usingCache']     ?? true;
-        $rules          = array_merge($ruleset->getRules(), $overrides);
+
+        // Get rules from registered custom fixers, if any
+        $customFixerRules = $options['customRules'] ?? [];
 
         return (new Config($ruleset->getName()))
             ->setCacheFile($cacheFile)
@@ -119,7 +121,7 @@ final class Factory
             ->setPhpExecutable($phpExecutable)
             ->setRiskyAllowed($isRiskyAllowed)
             ->setUsingCache($usingCache)
-            ->setRules($rules)
+            ->setRules(array_merge($ruleset->getRules(), $overrides, $customFixerRules))
         ;
     }
 }
