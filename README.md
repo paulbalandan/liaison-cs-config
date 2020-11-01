@@ -1,6 +1,7 @@
 # Liaison CS Config Factory
 
 ![build](https://github.com/paulbalandan/liaison-cs-config/workflows/build/badge.svg?branch=develop)
+[![PHP version](https://img.shields.io/packagist/php-v/liaison/cs-config)](https://php.net)
 [![Coverage Status](https://coveralls.io/repos/github/paulbalandan/liaison-cs-config/badge.svg?branch=develop)](https://coveralls.io/github/paulbalandan/liaison-cs-config?branch=develop)
 [![license MIT](https://img.shields.io/github/license/paulbalandan/cs-config)](LICENSE)
 [![Latest Stable Version](https://poser.pugx.org/liaison/cs-config/v)](//packagist.org/packages/liaison/cs-config)
