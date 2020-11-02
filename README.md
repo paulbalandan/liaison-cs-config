@@ -1,6 +1,7 @@
 # Liaison CS Config Factory
 
 ![build](https://github.com/paulbalandan/liaison-cs-config/workflows/build/badge.svg?branch=develop)
+[![PHP version](https://img.shields.io/packagist/php-v/liaison/cs-config)](https://php.net)
 [![Coverage Status](https://coveralls.io/repos/github/paulbalandan/liaison-cs-config/badge.svg?branch=develop)](https://coveralls.io/github/paulbalandan/liaison-cs-config?branch=develop)
 [![license MIT](https://img.shields.io/github/license/paulbalandan/cs-config)](LICENSE)
 [![Latest Stable Version](https://poser.pugx.org/liaison/cs-config/v)](//packagist.org/packages/liaison/cs-config)
@@ -12,9 +13,13 @@ for [`friendsofphp/php-cs-fixer`](http://github.com/FriendsOfPHP/PHP-CS-Fixer).
 
 ## Installation
 
-```bash
-composer require --dev liaison/cs-config
-```
+You can add this library as a local, per-project dependency to your project using [Composer](https://getcomposer.org/):
+
+    composer require liaison/cs-config
+
+If you only need this library during development, for instance to run your project's test suite, then you should add it as a development-time dependency:
+
+    composer require --dev liaison/cs-config
 
 ## Getting Started
 
@@ -59,7 +64,7 @@ use Liaison\CS\Config\Ruleset\Liaison;
 +$header = <<<EOD
 +This file is part of Liaison CS Config Factory.
 +
-+(c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
++(c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
 +
 +For the full copyright and license information, please view the LICENSE
 +file that was distributed with this source code.
@@ -78,7 +83,7 @@ This will enable and configure the `HeaderCommentFixer` so that file headers wil
 /**
  * This file is part of Liaison CS Config Factory.
  *
- * (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
+ * (c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -86,6 +91,31 @@ This will enable and configure the `HeaderCommentFixer` so that file headers wil
 
 namespace Liaison\CS\Config;
 ```
+
+Alternatively, as of v1.2.0, you can use the `Factory::createForLibrary()` method to add a pre-formatted
+license header comment like in above. This static method accepts four required arguments and two optional
+arguments in the following order:
+
+- string `$library`
+- string `$author`
+- int `$initialLicenseYear`
+- string `$rulesetName`
+- array `$overrides` (default: `[]`)
+- array `$options` (default: `[]`)
+
+```diff
+<?php
+
+use Liaison\CS\Config\Factory;
+use Liaison\CS\Config\Ruleset\Liaison;
+
+-return Factory::create(new Liaison());
++return Factory::createForLibrary('My Library', 'John Doe', 2020, Liaison::class);
+
+```
+
+This will create the same file headers as above. To configure a different format for the file header,
+you should the first method using `Factory::create()`.
 
 * Overriding rules in the ruleset
 
@@ -112,7 +142,7 @@ containing your desired options.
 
 **Options**
 
-| Key            | Allowed Types (from `ConfigInterface`)   | Default                              |
+| Key            | Allowed Types                            | Default                              |
 | -------------- | :--------------------------------------: | :----------------------------------: |
 | cacheFile      | `string`                                 | `.php_cs.cache`                      |
 | customFixers   | `FixerInterface[], iterable, \Traversable` | `[]`                                 |
@@ -124,6 +154,7 @@ containing your desired options.
 | phpExecutable  | `null, string`                           | `null`                               |
 | isRiskyAllowed | `bool`                                   | `false`                              |
 | usingCache     | `bool`                                   | `true`                               |
+| customRules    | `array`                                  | `[]`                                 |
 
 ```diff
 <?php
@@ -145,7 +176,7 @@ an organization-wide usage, right? Well, you are not constrained to use the defa
 and putting a long array of overrides. That's pretty nasty.
 
 The way to achieve this is dependent on you but the main idea is creating a new ruleset that
-extends `Liaison\CS\Config\Ruleset\BaseRuleset`. Yup, it's that easy. Then you just need to
+extends `Liaison\CS\Config\Ruleset\AbstractRuleset`. Yup, it's that easy. Then you just need to
 provide details for its required four (4) protected properties.
 
 ```php
@@ -153,9 +184,9 @@ provide details for its required four (4) protected properties.
 
 namespace MyCompany\CodingStandards\Ruleset;
 
-use Liaison\CS\Config\Ruleset\BaseRuleset;
+use Liaison\CS\Config\Ruleset\AbstractRuleset;
 
-class MyCompany extends BaseRuleset
+class MyCompany extends AbstractRuleset
 {
   /**
    * Name of this ruleset

@@ -11,11 +11,7 @@
 
 namespace Liaison\CS\Config\Ruleset;
 
-/**
- * @deprecated Use `AbstractRuleset` instead
- * @codeCoverageIgnore
- */
-abstract class BaseRuleset implements RulesetInterface
+abstract class AbstractRuleset implements RulesetInterface
 {
     /**
      * Name of the ruleset.
@@ -52,15 +48,6 @@ abstract class BaseRuleset implements RulesetInterface
      */
     final public function __construct(?string $header = null)
     {
-        @trigger_error(
-            sprintf(
-                '"%s" is deprecated and will be removed in v2.0. Use "%s" instead.',
-                __CLASS__,
-                'Liaison\CS\Config\Ruleset\AbstractRuleset'
-            ),
-            E_USER_DEPRECATED
-        );
-
         if (null !== $header) {
             $this->rules['header_comment'] = [
                 'header'       => trim($header),
