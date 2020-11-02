@@ -176,7 +176,7 @@ an organization-wide usage, right? Well, you are not constrained to use the defa
 and putting a long array of overrides. That's pretty nasty.
 
 The way to achieve this is dependent on you but the main idea is creating a new ruleset that
-extends `Liaison\CS\Config\Ruleset\BaseRuleset`. Yup, it's that easy. Then you just need to
+extends `Liaison\CS\Config\Ruleset\AbstractRuleset`. Yup, it's that easy. Then you just need to
 provide details for its required four (4) protected properties.
 
 ```php
@@ -184,9 +184,9 @@ provide details for its required four (4) protected properties.
 
 namespace MyCompany\CodingStandards\Ruleset;
 
-use Liaison\CS\Config\Ruleset\BaseRuleset;
+use Liaison\CS\Config\Ruleset\AbstractRuleset;
 
-class MyCompany extends BaseRuleset
+class MyCompany extends AbstractRuleset
 {
   /**
    * Name of this ruleset
