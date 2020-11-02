@@ -3,29 +3,51 @@
 /**
  * This file is part of Liaison CS Config Factory.
  *
- * (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
+ * (c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Liaison\CS\Config\Tests\Ruleset;
+namespace Liaison\CS\Config\Test;
 
-use Liaison\CS\Config\Ruleset\BaseRuleset;
 use Liaison\CS\Config\Ruleset\RulesetInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
-use RuntimeException;
 
 /**
  * @internal
+ * @codeCoverageIgnore
  */
-abstract class BaseRulesetTestCase extends TestCase
+abstract class AbstractRulesetTestCase extends TestCase
 {
-    final public function testAllConfiguredRulesAreBuiltIn()
+    final public static function headerCommentsProvider(): iterable
+    {
+        $headers = [
+            'empty'          => '',
+            'not-empty'      => 'foo',
+            'with-line-feed' => "\n",
+            'with-spaces'    => '  ',
+            'with-tab'       => "\t",
+        ];
+
+        foreach ($headers as $header) {
+            yield [$header];
+        }
+    }
+
+    final public static function ruleNamesProvider(): iterable
+    {
+        $ruleset = self::createRuleset();
+
+        return [
+            [$ruleset->getName(), array_keys($ruleset->getRules())],
+        ];
+    }
+
+    final public function testAllConfiguredRulesAreBuiltIn(): void
     {
         $fixersNotBuiltIn = array_diff(
             $this->configuredFixers(),
@@ -44,7 +66,7 @@ abstract class BaseRulesetTestCase extends TestCase
         ));
     }
 
-    final public function testAllBuiltInRulesAreConfigured()
+    final public function testAllBuiltInRulesAreConfigured(): void
     {
         $fixersWithoutConfiguration = array_diff(
             $this->builtInFixers(),
@@ -63,7 +85,7 @@ abstract class BaseRulesetTestCase extends TestCase
         ));
     }
 
-    final public function testHeaderCommentFixerIsDisabledByDefault()
+    final public function testHeaderCommentFixerIsDisabledByDefault(): void
     {
         $rules = self::createRuleset()->getRules();
 
@@ -75,8 +97,10 @@ abstract class BaseRulesetTestCase extends TestCase
      * @dataProvider headerCommentsProvider
      *
      * @param string $header
+     *
+     * @return void
      */
-    final public function testHeaderCommentFixerIsEnabledIfHeaderIsProvided(string $header)
+    final public function testHeaderCommentFixerIsEnabledIfHeaderIsProvided(string $header): void
     {
         $rules    = self::createRuleset($header)->getRules();
         $expected = [
@@ -88,28 +112,15 @@ abstract class BaseRulesetTestCase extends TestCase
         $this->assertSame($expected, $rules['header_comment']);
     }
 
-    final public function headerCommentsProvider()
-    {
-        $headers = [
-            'empty'          => '',
-            'not-empty'      => 'foo',
-            'with-line-feed' => "\n",
-            'with-spaces'    => '  ',
-            'with-tab'       => "\t",
-        ];
-
-        foreach ($headers as $header) {
-            yield [$header];
-        }
-    }
-
     /**
      * @dataProvider ruleNamesProvider
      *
      * @param string $source
      * @param array  $rules
+     *
+     * @return void
      */
-    final public function testRulesAreSortedByName(string $source, array $rules)
+    final public function testRulesAreSortedByName(string $source, array $rules): void
     {
         $sorted = $rules;
         sort($sorted);
@@ -118,15 +129,6 @@ abstract class BaseRulesetTestCase extends TestCase
             'Failed to assert that the rules in "%s" are sorted by name.',
             $source
         ));
-    }
-
-    final public function ruleNamesProvider()
-    {
-        $ruleset = self::createRuleset();
-
-        return [
-            [$ruleset->getName(), array_keys($ruleset->getRules())],
-        ];
     }
 
     /**
@@ -173,38 +175,8 @@ abstract class BaseRulesetTestCase extends TestCase
      */
     final protected static function createRuleset(?string $header = null): RulesetInterface
     {
-        $className  = self::getClassName();
-        $reflection = new ReflectionClass($className);
-        $ruleset    = $reflection->newInstance($header);
+        $className = preg_replace('/^(Liaison\\\\CS\\\\Config)\\\\Tests(\\\\.+)Test$/', '$1$2', static::class);
 
-        if (!$ruleset instanceof RulesetInterface || !$ruleset instanceof BaseRuleset) {
-            throw new RuntimeException(sprintf(
-                'Ruleset "%s" does not implement interface "%s" or does not extend "%s".',
-                $className,
-                'Liaison\CS\Config\Ruleset\RulesetInterface',
-                'Liaison\CS\Config\Ruleset\BaseRuleset'
-            ));
-        }
-
-        return $ruleset;
-    }
-
-    /**
-     * Extract the ruleset's class name.
-     *
-     * @return string
-     */
-    final protected static function getClassName(): string
-    {
-        $className = preg_replace('/Test$/', '', str_replace('\\Tests', '', static::class));
-
-        if (!\is_string($className) || '' === trim($className)) {
-            throw new RuntimeException(sprintf(
-                'Failed resolving class name from test class name "%s".',
-                static::class
-            ));
-        }
-
-        return $className;
+        return new $className($header);
     }
 }

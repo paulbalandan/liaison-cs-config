@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - develop
+      - bugfix/**
+      - feature/**
+      - release/**
     paths:
       - src/**
       - tests/**
+      - .github/workflows/build.yml
   pull_request:
     branches:
       - develop
@@ -23,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.2', '7.3', '7.4']
+        php-versions: ['7.3', '7.4']
 
     steps:
       - name: Checkout
@@ -33,7 +37,7 @@ jobs:
         uses: shivammathur/setup-php@master
         with:
           php-version: ${{ matrix.php-versions }}
-          tools: composer:v2
+          tools: composer
           extensions: curl, intl, mbstring, xdebug
           coverage: xdebug
 
@@ -57,6 +61,9 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 
+      - name: Setup Composer's GitHub OAuth access
+        run: composer config --global github-oauth.github.com ${{ secrets.ACCESS_TOKEN }}
+
       - name: Install dependencies
         run: composer update --ansi --no-scripts --no-progress --no-interaction
 
@@ -64,14 +71,14 @@ jobs:
         run: vendor/bin/php-cs-fixer fix --config=.php_cs.dist --verbose --dry-run --stop-on-violation --using-cache=no
 
       - name: Run Liaison CS Config Test Suite
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --colors=always
 
       - name: Run Coveralls
         run: |
-          composer global require php-coveralls/php-coveralls
+          composer global require --ansi php-coveralls/php-coveralls
           php-coveralls --coverage_clover=build/logs/clover.xml -v
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_PARALLEL: true
           COVERALLS_FLAG_NAME: PHP ${{ matrix.php-versions }}
 
@@ -84,5 +91,5 @@ jobs:
       - name: Upload to Coveralls API
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true

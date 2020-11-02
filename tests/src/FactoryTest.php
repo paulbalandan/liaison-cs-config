@@ -3,7 +3,7 @@
 /**
  * This file is part of Liaison CS Config Factory.
  *
- * (c) John Paul E. Balandan, CPA <paulbalandan@gmail.com>
+ * (c) 2020 John Paul E. Balandan, CPA <paulbalandan@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,10 +20,10 @@ use PHPUnit\Framework\TestCase;
  */
 final class FactoryTest extends TestCase
 {
-    public function testFactoryThrowsExceptionOnIncompatibleVersionId()
+    public function testFactoryThrowsExceptionOnIncompatibleVersionId(): void
     {
         /** @var \PHPUnit\Framework\MockObject\MockObject&\Liaison\CS\Config\Ruleset\RulesetInterface */
-        $ruleset = $this->createMock('Liaison\CS\Config\Ruleset\Liaison');
+        $ruleset = $this->createMock('Liaison\CS\Config\Ruleset\RulesetInterface');
         $ruleset
             ->method('getRequiredPHPVersion')
             ->willReturn(\PHP_VERSION_ID + 2)
@@ -39,13 +39,13 @@ final class FactoryTest extends TestCase
         Factory::create($ruleset);
     }
 
-    public function testFactoryReturnsInstanceOfConfig()
+    public function testFactoryReturnsInstanceOfConfig(): void
     {
         $config = Factory::create(new Liaison());
         $this->assertInstanceOf('PhpCsFixer\Config', $config);
     }
 
-    public function testFactoryPassesSameRulesFromRuleset()
+    public function testFactoryPassesSameRulesFromRuleset(): void
     {
         $ruleset = new Liaison();
         $config  = Factory::create($ruleset);
@@ -53,10 +53,10 @@ final class FactoryTest extends TestCase
         $this->assertSame($ruleset->getRules(), $config->getRules());
     }
 
-    public function testFactoryAllowsOverrideOfRules()
+    public function testFactoryAllowsOverrideOfRules(): void
     {
         $config = Factory::create(new Liaison());
-        $this->assertSame(['default' => 'align_single_space_minimal'], $config->getRules()['binary_operator_spaces']);
+        $this->assertIsArray($config->getRules()['binary_operator_spaces']);
 
         $config = Factory::create(new Liaison(), [
             'binary_operator_spaces' => false,
@@ -64,7 +64,7 @@ final class FactoryTest extends TestCase
         $this->assertFalse($config->getRules()['binary_operator_spaces']);
     }
 
-    public function testFactoryReturnsDefaultOptionsWhenNoOptionsGiven()
+    public function testFactoryReturnsDefaultOptionsWhenNoOptionsGiven(): void
     {
         $config = Factory::create(new Liaison());
 
@@ -80,7 +80,7 @@ final class FactoryTest extends TestCase
         $this->assertTrue($config->getUsingCache());
     }
 
-    public function testFactoryConsumesPassedOptionsToIt()
+    public function testFactoryConsumesPassedOptionsToIt(): void
     {
         $options = [
             'cacheFile'     => __DIR__ . '/../../build/.php_cs.cache',
@@ -100,5 +100,20 @@ final class FactoryTest extends TestCase
         $this->assertSame($options['lineEnding'], $config->getLineEnding());
         $this->assertSame($options['phpExecutable'], $config->getPhpExecutable());
         $this->assertFalse($config->getUsingCache());
+    }
+
+    public function testCreateForLibraryCreatesPreformattedLicense(): void
+    {
+        $config = Factory::createForLibrary('Library', 'Foo Bar', 2020, 'Liaison\CS\Config\Ruleset\Liaison');
+        $header = $config->getRules()['header_comment']['header'];
+
+        $this->assertStringContainsString('This file is part of Library.', $header);
+        $this->assertStringContainsString('(c) 2020 Foo Bar', $header);
+    }
+
+    public function testCreateForLibraryThrowsRuntimeExceptionForWrongRuleset(): void
+    {
+        $this->expectException('RuntimeException');
+        Factory::createForLibrary('Library', 'Foo', 2020, 'Liaison\CS\Config\Factory');
     }
 }
