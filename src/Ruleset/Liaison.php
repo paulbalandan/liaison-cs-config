@@ -14,7 +14,7 @@ namespace Liaison\CS\Config\Ruleset;
 /**
  * Rules for the `Liaison` namespace.
  */
-class Liaison extends BaseRuleset
+final class Liaison extends AbstractRuleset
 {
     protected $name = 'Liaison';
 
@@ -24,7 +24,10 @@ class Liaison extends BaseRuleset
         'array_syntax'            => ['syntax' => 'short'],
         'backtick_to_shell_exec'  => true,
         'binary_operator_spaces'  => [
-            'default' => 'align_single_space_minimal',
+            'default'   => 'align_single_space_minimal',
+            'operators' => [
+                '??' => 'single_space',
+            ],
         ],
         'blank_line_after_namespace'   => true,
         'blank_line_after_opening_tag' => true,
@@ -98,13 +101,11 @@ class Liaison extends BaseRuleset
         'final_public_method_for_abstract_class' => false, // risky
         'final_static_access'                    => true,
         'fopen_flag_order'                       => true, // risky
-        'fopen_flags'                            => [
-            'b_mode' => true, // risky
-        ],
-        'full_opening_tag'             => true,
-        'fully_qualified_strict_types' => true,
-        'function_declaration'         => ['closure_function_spacing' => 'one'],
-        'function_to_constant'         => [
+        'fopen_flags'                            => ['b_mode' => true], // risky
+        'full_opening_tag'                       => true,
+        'fully_qualified_strict_types'           => true,
+        'function_declaration'                   => ['closure_function_spacing' => 'one'],
+        'function_to_constant'                   => [
             'functions' => [ // risky
                 'get_called_class',
                 'get_class',
@@ -236,7 +237,7 @@ class Liaison extends BaseRuleset
         'no_unneeded_final_method'                         => true, // risky
         'no_unreachable_default_argument_value'            => true, // risky
         'no_unset_cast'                                    => true,
-        'no_unset_on_property'                             => true, // risky
+        'no_unset_on_property'                             => false, // risky
         'no_unused_imports'                                => true,
         'no_useless_else'                                  => true,
         'no_useless_return'                                => true,
@@ -281,7 +282,7 @@ class Liaison extends BaseRuleset
         'php_unit_mock'                                 => true, // risky
         'php_unit_mock_short_will_return'               => true, // risky
         'php_unit_namespaced'                           => true, // risky
-        'php_unit_no_expectation_annotation'            => false, // risky
+        'php_unit_no_expectation_annotation'            => true, // risky
         'php_unit_ordered_covers'                       => true,
         'php_unit_set_up_tear_down_visibility'          => true, // risky
         'php_unit_size_class'                           => false,
@@ -305,7 +306,7 @@ class Liaison extends BaseRuleset
         'phpdoc_scalar'                                 => true,
         'phpdoc_separation'                             => true,
         'phpdoc_single_line_var_spacing'                => true,
-        'phpdoc_summary'                                => false,
+        'phpdoc_summary'                                => true,
         'phpdoc_to_comment'                             => true,
         'phpdoc_to_param_type'                          => false, // risky
         'phpdoc_to_return_type'                         => false, // risky
@@ -317,13 +318,13 @@ class Liaison extends BaseRuleset
         'phpdoc_var_without_name'                       => true,
         'pow_to_exponentiation'                         => true,
         'pre_increment'                                 => false, // deprecated
-        'protected_to_private'                          => false,
+        'protected_to_private'                          => true,
         'psr0'                                          => false,
         'psr4'                                          => true,
         'random_api_migration'                          => true,
         'return_assignment'                             => true,
         'return_type_declaration'                       => true,
-        'self_accessor'                                 => false, // risky
+        'self_accessor'                                 => true, // risky
         'self_static_accessor'                          => true,
         'semicolon_after_instruction'                   => true,
         'set_type_to_cast'                              => true, // risky

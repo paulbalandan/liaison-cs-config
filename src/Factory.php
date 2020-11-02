@@ -96,16 +96,16 @@ final class Factory
         ;
 
         // Resolve Config options
-        $cacheFile      = $options['cacheFile']      ?? '.php_cs.cache';
-        $customFixers   = $options['customFixers']   ?? [];
-        $finder         = $options['finder']         ?? $defaultFinder;
-        $format         = $options['format']         ?? 'txt';
-        $hideProgress   = $options['hideProgress']   ?? false;
-        $indent         = $options['indent']         ?? '    ';
-        $lineEnding     = $options['lineEnding']     ?? "\n";
-        $phpExecutable  = $options['phpExecutable']  ?? null;
+        $cacheFile      = $options['cacheFile'] ?? '.php_cs.cache';
+        $customFixers   = $options['customFixers'] ?? [];
+        $finder         = $options['finder'] ?? $defaultFinder;
+        $format         = $options['format'] ?? 'txt';
+        $hideProgress   = $options['hideProgress'] ?? false;
+        $indent         = $options['indent'] ?? '    ';
+        $lineEnding     = $options['lineEnding'] ?? "\n";
+        $phpExecutable  = $options['phpExecutable'] ?? null;
         $isRiskyAllowed = $options['isRiskyAllowed'] ?? ($ruleset->willAutoActivateIsRiskyAllowed() ?: false);
-        $usingCache     = $options['usingCache']     ?? true;
+        $usingCache     = $options['usingCache'] ?? true;
 
         // Get rules from registered custom fixers, if any
         $customFixerRules = $options['customRules'] ?? [];

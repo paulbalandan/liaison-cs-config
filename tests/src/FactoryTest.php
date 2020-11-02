@@ -23,7 +23,7 @@ final class FactoryTest extends TestCase
     public function testFactoryThrowsExceptionOnIncompatibleVersionId(): void
     {
         /** @var \PHPUnit\Framework\MockObject\MockObject&\Liaison\CS\Config\Ruleset\RulesetInterface */
-        $ruleset = $this->createMock('Liaison\CS\Config\Ruleset\Liaison');
+        $ruleset = $this->createMock('Liaison\CS\Config\Ruleset\RulesetInterface');
         $ruleset
             ->method('getRequiredPHPVersion')
             ->willReturn(\PHP_VERSION_ID + 2)
@@ -56,7 +56,7 @@ final class FactoryTest extends TestCase
     public function testFactoryAllowsOverrideOfRules(): void
     {
         $config = Factory::create(new Liaison());
-        $this->assertSame(['default' => 'align_single_space_minimal'], $config->getRules()['binary_operator_spaces']);
+        $this->assertIsArray($config->getRules()['binary_operator_spaces']);
 
         $config = Factory::create(new Liaison(), [
             'binary_operator_spaces' => false,
