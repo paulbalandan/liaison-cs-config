@@ -9,21 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Liaison\CS\Config\Tests\Ruleset;
+namespace Liaison\CS\Config\Test;
 
-use Liaison\CS\Config\Ruleset\BaseRuleset;
 use Liaison\CS\Config\Ruleset\RulesetInterface;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\FixerFactory;
 use PhpCsFixer\RuleSet;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
-use RuntimeException;
 
 /**
  * @internal
+ * @codeCoverageIgnore
  */
-abstract class BaseRulesetTestCase extends TestCase
+abstract class AbstractRulesetTestCase extends TestCase
 {
     final public static function headerCommentsProvider(): iterable
     {
@@ -177,38 +175,8 @@ abstract class BaseRulesetTestCase extends TestCase
      */
     final protected static function createRuleset(?string $header = null): RulesetInterface
     {
-        $className  = self::getClassName();
-        $reflection = new ReflectionClass($className);
-        $ruleset    = $reflection->newInstance($header);
+        $className = preg_replace('/^(Liaison\\\\CS\\\\Config)\\\\Tests(\\\\.+)Test$/', '$1$2', static::class);
 
-        if (!$ruleset instanceof RulesetInterface || !$ruleset instanceof BaseRuleset) {
-            throw new RuntimeException(sprintf(
-                'Ruleset "%s" does not implement interface "%s" or does not extend "%s".',
-                $className,
-                'Liaison\CS\Config\Ruleset\RulesetInterface',
-                'Liaison\CS\Config\Ruleset\BaseRuleset'
-            ));
-        }
-
-        return $ruleset;
-    }
-
-    /**
-     * Extract the ruleset's class name.
-     *
-     * @return string
-     */
-    final protected static function getClassName(): string
-    {
-        $className = preg_replace('/Test$/', '', str_replace('\\Tests', '', static::class));
-
-        if (!\is_string($className) || '' === trim($className)) {
-            throw new RuntimeException(sprintf(
-                'Failed resolving class name from test class name "%s".',
-                static::class
-            ));
-        }
-
-        return $className;
+        return new $className($header);
     }
 }

@@ -11,12 +11,11 @@
 
 namespace Liaison\CS\Config\Tests\Ruleset;
 
+use Liaison\CS\Config\Test\AbstractRulesetTestCase;
+
 /**
  * @internal
- *
- * @covers \Liaison\CS\Config\Ruleset\BaseRuleset
- * @covers \Liaison\CS\Config\Ruleset\Liaison
  */
-final class LiaisonTest extends BaseRulesetTestCase
+final class LiaisonTest extends AbstractRulesetTestCase
 {
 }

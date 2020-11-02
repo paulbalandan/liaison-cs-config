@@ -11,12 +11,11 @@
 
 namespace Liaison\CS\Config\Tests\Ruleset;
 
+use Liaison\CS\Config\Test\AbstractRulesetTestCase;
+
 /**
  * @internal
- *
- * @covers \Liaison\CS\Config\Ruleset\BaseRuleset
- * @covers \Liaison\CS\Config\Ruleset\CodeIgniter4
  */
-final class CodeIgniter4Test extends BaseRulesetTestCase
+final class CodeIgniter4Test extends AbstractRulesetTestCase
 {
 }

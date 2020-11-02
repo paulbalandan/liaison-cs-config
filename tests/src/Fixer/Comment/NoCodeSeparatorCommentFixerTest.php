@@ -11,7 +11,7 @@
 
 namespace Liaison\CS\Config\Tests\Fixer\Comment;
 
-use Liaison\CS\Config\Tests\Fixer\AbstractCustomFixerTestCase;
+use Liaison\CS\Config\Test\AbstractCustomFixerTestCase;
 
 /**
  * @internal
@@ -33,11 +33,6 @@ final class NoCodeSeparatorCommentFixerTest extends AbstractCustomFixerTestCase
             "<?php\n\$a;\n\n\$b;\n",
             "<?php\n\$a;\n// ---------\n\$b;\n",
         ];
-    }
-
-    public function testIsRisky(): void
-    {
-        $this->assertFalse($this->fixer->isRisky());
     }
 
     /**
