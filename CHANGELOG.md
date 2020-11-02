@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.2.0](https://github.com/paulbalandan/liaison-cs-config/compare/v1.1.5...v1.2.0) - 2020-11-02
+
+### Added
+
+- Add starting year of copyright at LICENSE and file headers
+- Add new static method for Factory: `createForLibrary`
+- Add custom fixer `NoCodeSeparatorCommentFixer`
+- Add new option key to accept custom rules from custom fixers
+- Add PHP version badge to README
+
+### Changed
+
+- Bump PHP version requirement to PHP 7.3
+- Bump `Liaison` ruleset's minimum required PHP version ID to `703200`
+- Updated installation instructions in README
+- Restricts Finder to files only
+- Return types of test classes' test methods are added explicitly as `void`
+- Refactored abstract test cases into `src/`
+- Updated rules of rulesets and declared them as "final" classes
+
+### Fixed
+
+- Make the default resolution of path by `Finder` safe from `realpath`'s falsy return
+
+### Deprecated
+
+- Deprecated `BaseRuleset` in favor of `AbstractRuleset`
+
 ## [v1.1.5](https://github.com/paulbalandan/liaison-cs-config/compare/v1.1.4...v1.1.5) - 2020-10-11
 
 ### Added
