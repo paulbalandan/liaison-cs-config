@@ -25,13 +25,78 @@ final class NoCodeSeparatorCommentFixerTest extends AbstractCustomFixerTestCase
         yield ['<?php $a; // a comment'];
 
         yield [
-            "<?php\n\$a;\n\n\$b;\n",
-            "<?php\n\$a;\n//-----------------\n\$b;\n",
+            <<<'EOD'
+                <?php
+
+                $a;
+
+                $b;
+                EOD,
+            <<<'EOD'
+                <?php
+
+                $a;
+
+                //-------------------------
+
+                $b;
+                EOD,
         ];
 
         yield [
-            "<?php\n\$a;\n\n\$b;\n",
-            "<?php\n\$a;\n// ---------\n\$b;\n",
+            <<<'EOD'
+                <?php
+
+                $a;
+
+                $b;
+                EOD,
+            <<<'EOD'
+                <?php
+
+                $a;
+
+                // ------------------------
+
+                $b;
+                EOD,
+        ];
+
+        yield [
+            <<<'EOD'
+                <?php
+
+                class Foo
+                {
+                    public function a() {}
+
+                    public function b() {}
+
+                    //---------------------
+                    // C
+                    //---------------------
+
+                    public function c() {}
+                }
+                EOD,
+            <<<'EOD'
+                <?php
+
+                class Foo
+                {
+                    public function a() {}
+
+                    //---------------------
+
+                    public function b() {}
+
+                    //---------------------
+                    // C
+                    //---------------------
+
+                    public function c() {}
+                }
+                EOD,
         ];
     }
 

@@ -68,8 +68,39 @@ final class NoCodeSeparatorCommentFixer extends AbstractCustomFixer
                 continue;
             }
 
+            if ($this->isCommentBlockBoundary($tokens, $index)) {
+                continue;
+            }
+
+            $tokens->removeLeadingWhitespace($index);
             $tokens->clearTokenAndMergeSurroundingWhitespace($index);
         }
+    }
+
+    private function isCommentBlockBoundary(Tokens $tokens, int $index): bool
+    {
+        $prevIndex = $tokens->getPrevNonWhitespace($index);
+        $nextIndex = $tokens->getNextNonWhitespace($index);
+
+        if (null === $prevIndex) {
+            $prevTokenIsCodeSeparator = false; // @codeCoverageIgnore
+        } else {
+            /** @var \PhpCsFixer\Tokenizer\Token $prevToken */
+            $prevToken = $tokens[$prevIndex];
+
+            $prevTokenIsCodeSeparator = $prevToken->isGivenKind(T_COMMENT) && !$this->isCodeSeparator($prevToken->getContent());
+        }
+
+        if (null === $nextIndex) {
+            $nextTokenIsCodeSeparator = false;
+        } else {
+            /** @var \PhpCsFixer\Tokenizer\Token $nextToken */
+            $nextToken = $tokens[$nextIndex];
+
+            $nextTokenIsCodeSeparator = $nextToken->isGivenKind(T_COMMENT) && !$this->isCodeSeparator($nextToken->getContent());
+        }
+
+        return $prevTokenIsCodeSeparator || $nextTokenIsCodeSeparator;
     }
 
     private function isCodeSeparator(string $content): bool
