@@ -11,6 +11,10 @@
 This library provides a configuration factory for custom rule sets
 for [`friendsofphp/php-cs-fixer`](http://github.com/FriendsOfPHP/PHP-CS-Fixer).
 
+**[DEPRECATED] This library is deprecated in favor of using [nexusphp/cs-config][1].
+Please use that instead.**
+
+[1]: https://github.com/NexusPHP/cs-config
 ## Installation
 
 You can add this library as a local, per-project dependency to your project using [Composer](https://getcomposer.org/):
