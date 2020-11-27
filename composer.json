@@ -42,5 +42,6 @@
     "support": {
         "issues": "https://github.com/paulbalandan/liaison-cs-config/issues",
         "source": "https://github.com/paulbalandan/liaison-cs-config"
-    }
+    },
+    "abandoned": "nexusphp/cs-config"
 }
